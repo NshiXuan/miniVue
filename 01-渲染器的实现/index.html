@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="./renderer.js"></script>
+  <script>
+
+    // 1.通过h函数来创建一个vnode
+    const vnode = h('div', { class: 'zs', id: 'aaa', name: 'zs' }, [
+      h('h2', null, '当前计数：100'),
+      h('button', null, '+1')
+    ])
+    // console.log(vnode);
+
+    // 2.通过mount函数，将vnode挂载到div#app上
+    mount(vnode, document.querySelector('#app'))
+
+    // 3.创建新的vnode
+    // 3.1标签不同
+    // setTimeout(() => {
+    //   const vnode1 = h('h2', { class: 'ls' }, '哈哈哈')
+    //   patch(vnode, vnode1)
+    // }, 2000)
+
+    // 3.2标签相同
+    setTimeout(() => {
+      // 3.2.1 子孙是字符串（第三个参数）
+      // const vnode1 = h('div', { class: 'ls', id: 'aaa' }, '哈哈哈')
+      // patch(vnode, vnode1)
+
+      // 3.2.2 老节点Children是字符串 新节点Children是字符串是数组
+      // const vnode1 = h('div', { class: 'ls', id: 'aaa' }, [
+      //   h('h2', { class: 'oldChildrenIsString' }, '子孙是数组')
+      // ])
+      // patch(vnode, vnode1)
+
+      // 3.2.3 老节点Children是数组 新节点Children是字符串是数组 且新节点长
+      // const vnode1 = h('div', { class: 'ls', id: 'aaa' }, [
+      //   h('h2', null, '当前计数：100'),
+      //   h('button', null, '+1'),
+      //   h('h2', null, '我是新节点中的与老节点不一样Children')
+      // ])
+      // patch(vnode, vnode1)
+      // 3.2.3 老节点Children是数组 新节点Children是字符串是数组 且老节点长
+      const vnode1 = h('div', { class: 'ls', id: 'aaa' }, [
+        h('h2', null, '我是新节点中的Children，且老节点长'),
+      ])
+      patch(vnode, vnode1)
+    }, 2000)
+
+  </script>
+</body>
+
+</html>
