@@ -84,6 +84,6 @@ watchEffect(function () {
   console.log('effect4: ', foo.height);
 })
 
-info.counter++
+// info.counter++
 // info.name = 'ls'
 // foo.height = 2

@@ -72,13 +72,12 @@ const patch = (n1, n2) => {
     // 2.2删除旧的props
     for (const key in oldProps) {
       // 如果我们的newProps中没有这个属性就删除
+      if (key.startsWith('on')) {
+        const value = oldProps[key]
+        el.removeEventListener(key.slice(2).toLocaleLowerCase(), value)
+      }
       if (!(key in newProps)) {
-        if (key.startsWith('on')) {
-          const value = oldProps[key]
-          el.removeEventListener(key.slice(2).toLocaleLowerCase(), value)
-        } else {
-          el.removeAttribute(key)
-        }
+        el.removeAttribute(key)
       }
     }
 
